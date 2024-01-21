@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="functionCanvas" width="600" height="400"></canvas>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var canvas = document.getElementById("functionCanvas");
+            var context = canvas.getContext("2d");
+
+            context.translate(canvas.width / 2, canvas.height / 2);
+            context.strokeStyle = "#000";
+            context.lineWidth = 2;
+
+            drawFunction(Math.sin, "red"); 
+            drawFunction(Math.cos, "green");
+            drawFunction(function (x) { return x * x; }, "blue"); 
+            drawFunction(Math.sinh, "orange"); 
+            drawFunction(Math.cosh, "pink");
+            drawFunction(Math.log, "purple"); 
+            drawFunction(Math.exp, "brown");
+
+            function drawFunction(func, color) {
+                context.beginPath();
+                context.strokeStyle = color;
+                for (var x = -canvas.width / 2; x <= canvas.width / 2; x += 0.1) {
+                    var y = func(x / 50) * 50;
+                    context.lineTo(x, -y);
+                }
+                context.stroke();
+            }
+        });
+    </script>
+</body>
+</html>
